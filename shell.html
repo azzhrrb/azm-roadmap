@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azzambfit roadmap</title>
+<meta property="og:title" content="Azzambfit roadmap">
+<meta name="color-scheme" content="light">
+<!-- Internal product discussion: shareable by URL but kept out of search indexes. -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315171a'/%3E%3Cpath d='M8 21V11h4.6a3.4 3.4 0 0 1 0 6.8H11v3.2z' fill='%23fff'/%3E%3Ccircle cx='21' cy='13' r='3' fill='%23e3b341'/%3E%3Crect x='18' y='18' width='6' height='3' rx='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#eceef1;--surface:#fff;--surface-2:#e7eaee;--line:#d9dde3;
+    --ink:#15171a;--ink-2:#4c525c;--ink-3:#6c737e;
+    --amber:#ffb511;--amber-text:#7a4f00;--danger:#b42b24;
+    --theme-start:#b8811a;--theme-loop:#477567;--theme-back:#b4552d;
+    --theme-progress:#746b91;--theme-coach:#537a98;--theme-data:#5f6b7a;
+    --radius:14px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Arabic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  html[dir=rtl] body{font-family:"Noto Sans Arabic",var(--font)}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  ol,ul{margin:0;padding:0;list-style:none}
+  h1,h2,h3,p{margin:0}
+  .mono{font-variant-numeric:tabular-nums}
+  .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .top-in{max-width:1480px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .brand{flex:1 1 260px;min-width:0}
+  .brand h1{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .brand p{font-size:12.5px;color:var(--ink-3)}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .search{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+  .search svg{width:15px;height:15px;color:var(--ink-3);flex:none}
+  .search input{border:0;outline:0;background:none;width:190px;font:inherit;font-size:13px;color:var(--ink)}
+  .seg{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+  .seg button{padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+  .seg button[aria-pressed=true]{background:var(--ink);color:var(--surface)}
+  .btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:12.5px;font-weight:500;color:var(--ink-2)}
+  .btn[aria-pressed=true]{border-color:color-mix(in srgb,var(--amber) 60%,transparent);background:color-mix(in srgb,var(--amber) 14%,transparent);color:var(--ink)}
+  .btn svg{width:15px;height:15px}
+  .btn:hover{color:var(--ink)}
+  main{max-width:1480px;margin:0 auto;padding:16px 20px 64px;display:flex;flex-direction:column;gap:16px}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+  .rules{padding:16px 18px;display:grid;gap:20px;grid-template-columns:1.35fr 1fr 1fr}
+  .k{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+  .rules ol{margin-top:8px;display:flex;flex-direction:column;gap:7px;counter-reset:r}
+  .rules ol li{display:flex;gap:8px;font-size:12.5px;color:var(--ink-2)}
+  .rules ol li::before{counter-increment:r;content:counter(r) ".";color:var(--ink-3);flex:none}
+  .glossary{margin-top:8px;display:flex;flex-direction:column;gap:7px}
+  .glossary li{font-size:12.5px;color:var(--ink-2)}
+  .glossary b{color:var(--ink);font-weight:600}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:6px;vertical-align:baseline}
+  .stack{display:flex;flex-direction:column;gap:20px}
+  .bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;padding:11px 16px}
+  .stat{display:flex;align-items:baseline;gap:8px}
+  .stat span{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+  .stat b{font-size:19px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+  .meta{margin-inline-start:auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:12.5px;color:var(--ink-2)}
+  .linkish{color:var(--ink-2);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+  .linkish:hover{color:var(--ink)}
+  .layout{display:grid;gap:20px;grid-template-columns:206px minmax(0,1fr);align-items:start}
+  .facets{display:flex;flex-direction:column;gap:16px}
+  .facet h3{padding:0 8px 5px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+  .facet button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;padding:4px 8px;border-radius:9px;font-size:13px;color:var(--ink-2);text-align:start}
+  .facet button:hover{background:var(--surface-2);color:var(--ink)}
+  .facet button[aria-pressed=true]{background:var(--ink);color:var(--surface)}
+  .facet button.zero{opacity:.4}
+  .facet .n{font-size:12px;font-variant-numeric:tabular-nums;flex:none}
+  .facet .lbl{display:flex;align-items:center;min-width:0}
+  .facet .lbl span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .board{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .col>header{border-bottom:1px solid var(--line);padding-bottom:8px;display:flex;flex-direction:column;gap:3px}
+  .col .head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .col .head h2{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .col .head em{font-size:12px;font-style:normal;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .col>header p{font-size:12px;color:var(--ink-3)}
+  .empty{border:1px dashed var(--line);border-radius:var(--radius);padding:24px 12px;text-align:center;font-size:12px;color:var(--ink-3)}
+  .card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:12px 13px;box-shadow:0 1px 2px rgba(21,23,26,.04)}
+  .card.parked{border-style:dashed;background:color-mix(in srgb,var(--surface) 72%,transparent);box-shadow:none}
+  .card .ttl{display:flex;align-items:flex-start;gap:9px}
+  .card .ttl i{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
+  .card h3{font-size:14px;font-weight:650;line-height:1.35}
+  .card .why{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+  .card .parked{margin-top:8px;padding-inline-start:9px;border-inline-start:2px solid var(--line);font-size:12px;color:var(--ink-3);font-style:italic}
+  .chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);font-size:11px;font-weight:500;color:var(--ink-2)}
+  .chip.danger{border-color:color-mix(in srgb,var(--danger) 32%,transparent);background:color-mix(in srgb,var(--danger) 10%,transparent);color:var(--danger)}
+  .foot{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 8px;font-size:11.5px;color:var(--ink-3)}
+  .foot .src{color:var(--amber-text)}
+  table{width:100%;border-collapse:collapse;text-align:start}
+  thead th{padding:10px 12px;border-bottom:1px solid var(--line);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);text-align:start;white-space:nowrap}
+  tbody td{padding:12px;border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);vertical-align:top;font-size:12.5px;color:var(--ink-2)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody td:first-child{max-width:52ch}
+  tbody .t{font-size:13px;font-weight:600;color:var(--ink)}
+  tbody .p{margin-top:5px;font-size:12px;color:var(--ink-3);font-style:italic}
+  tbody .s{margin-top:5px;font-size:11.5px;color:var(--amber-text)}
+  .scroll{overflow-x:auto}
+  .note{font-size:12.5px;color:var(--ink-3)}
+  .mobileOnly{display:none}
+  @media (max-width:1180px){
+    .rules{grid-template-columns:1fr 1fr}
+    .board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (max-width:880px){
+    .layout{grid-template-columns:minmax(0,1fr)}
+    .facets{display:none}
+    .facets.open{display:flex}
+    .mobileOnly{display:inline-flex}
+    .rules{grid-template-columns:1fr}
+  }
+  @media (max-width:620px){.board{grid-template-columns:minmax(0,1fr)}}
+  /* Drag to move: the board is a bank of items you can rearrange freely. */
+  .colbody{display:flex;flex-direction:column;gap:10px;min-height:56px;border-radius:12px}
+  .col.over .colbody{background:color-mix(in srgb,var(--amber) 7%,transparent)}
+  .card{cursor:grab}
+  .card.dragging{opacity:.35}
+  .ph{height:34px;border:1px dashed color-mix(in srgb,var(--amber) 75%,transparent);background:color-mix(in srgb,var(--amber) 12%,transparent);border-radius:10px}
+  .card.picked{border-color:var(--ink);box-shadow:0 0 0 2px color-mix(in srgb,var(--ink) 18%,transparent)}
+  .movebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 16px}
+  .movebar p{font-size:12.5px;color:var(--ink-2)}
+  .movebar .moves{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-inline-start:auto}
+  .hint{font-size:11.5px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/*__DATA__*/
+</script>
+<script>
+var S={lang:"en",lens:"lifestyle",view:"board",q:"",rules:false,facets:false,picked:null,drag:null,sel:{themes:[],segments:[],kinds:[],platforms:[],efforts:[],evidence:[]}};
+// The tab title follows the language toggle so a shared file never shows an English title in Arabic.
+var META={
+  en:{title:"Azzambfit roadmap"},
+  ar:{title:"خارطة طريق Azzambfit"}
+};
+var DIMS=["themes","segments","kinds","platforms","efforts","evidence"];
+var CC={themes:"var(--theme-start)",segments:"var(--ink-3)",kinds:"var(--ink-3)",platforms:"var(--ink-3)",efforts:"var(--ink-3)",evidence:"var(--ink-3)"};
+var themeColor={start:"var(--theme-start)",loop:"var(--theme-loop)",back:"var(--theme-back)",progress:"var(--theme-progress)",coach:"var(--theme-coach)",data:"var(--theme-data)"};
+
+// The board is a bank of items: every item sits in exactly one column, and the user may move or
+// reorder them freely. Order is kept here, not on the item, so the authored file stays untouched.
+var HZ=DATA.horizons.map(function(h){return h.id});
+var DEFAULT_ORDER=(function(){var o={};HZ.forEach(function(h){o[h]=[]});DATA.items.forEach(function(it){o[it.horizon].push(it.id)});return o})();
+var STORE="azzambfit.roadmap.order.v1";
+function cloneOrder(o){var c={};HZ.forEach(function(h){c[h]=(o[h]||[]).slice()});return c}
+function knownId(id){for(var i=0;i<DATA.items.length;i++){if(DATA.items[i].id===id)return true}return false}
+// Tolerate a stale saved order: unknown ids are dropped and new items return to their authored column.
+function reconcile(raw){
+  var placed={},out={};
+  HZ.forEach(function(h){out[h]=[]});
+  if(raw&&typeof raw==="object"){
+    HZ.forEach(function(h){
+      (Object.prototype.toString.call(raw[h])==="[object Array]"?raw[h]:[]).forEach(function(id){
+        if(!knownId(id)||placed[id])return;
+        placed[id]=1;out[h].push(id);
+      });
+    });
+  }
+  DATA.items.forEach(function(it){
+    if(placed[it.id])return;
+    placed[it.id]=1;out[it.horizon].push(it.id);
+  });
+  return out;
+}
+// Some browsers refuse localStorage on file:// origins. When that happens the arrangement is
+// mirrored into the URL hash instead, so a reload never silently loses the user's moves.
+function encodeOrder(){return HZ.map(function(h){return h+"."+S.order[h].join("+")}).join("~")}
+function decodeOrder(s){
+  var o={},any=false;
+  HZ.forEach(function(h){o[h]=[]});
+  (s||"").split("~").forEach(function(part){
+    var i=part.indexOf(".");
+    if(i<0)return;
+    var h=part.slice(0,i);
+    if(HZ.indexOf(h)<0)return;
+    part.slice(i+1).split("+").forEach(function(id){if(id)o[h].push(id)});
+    any=true;
+  });
+  return any?reconcile(o):null;
+}
+function readHash(){
+  try{var m=/[#&]o=([^&]*)/.exec(location.hash||"");return m?decodeOrder(decodeURIComponent(m[1])):null}catch(e){return null}
+}
+function writeHash(){
+  try{
+    var v="#o="+encodeURIComponent(encodeOrder());
+    if(location.hash!==v){try{history.replaceState(null,"",v)}catch(e){location.hash=v}}
+  }catch(e){}
+}
+function clearHash(){
+  try{
+    if(/[#&]o=/.test(location.hash||""))history.replaceState(null,"",location.pathname+location.search);
+  }catch(e){}
+}
+function loadOrder(){
+  var fromHash=readHash();
+  if(fromHash)return fromHash;
+  try{var raw=localStorage.getItem(STORE);if(raw)return reconcile(JSON.parse(raw))}catch(e){}
+  return cloneOrder(DEFAULT_ORDER);
+}
+function saveOrder(){
+  try{localStorage.setItem(STORE,JSON.stringify(S.order));S.persist=true}
+  catch(e){S.persist=false;writeHash()}
+}
+function isCustom(){return HZ.some(function(h){return S.order[h].join("\u0001")!==DEFAULT_ORDER[h].join("\u0001")})}
+function placeOf(){var m={};HZ.forEach(function(h){S.order[h].forEach(function(id){m[id]=h})});return m}
+function rankMap(){var m={};HZ.forEach(function(h){S.order[h].forEach(function(id,i){m[id]=i})});return m}
+function moveTo(id,h){
+  if(!id||!h)return;
+  HZ.forEach(function(x){var p=S.order[x].indexOf(id);if(p>=0)S.order[x].splice(p,1)});
+  S.order[h].push(id);
+  S.picked=null;saveOrder();render();
+}
+S.order=loadOrder();
+
+function fmt(n,lang){try{return new Intl.NumberFormat(lang==="ar"?"ar-EH":"en-GB").format(n)}catch(e){return String(n)}}
+function L(o,field){if(!o)return"";var v=o[field]!==undefined?o[field]:o;if(v&&typeof v==="object")return v[S.lang]!==undefined?v[S.lang]:v.en;return v}
+function T(k){var r=DATA.ui[S.lang]||DATA.ui.en;return r[k]!==undefined?r[k]:(DATA.ui.en[k]!==undefined?DATA.ui.en[k]:k)}
+function pick(o){return o?(o[S.lang]!==undefined?o[S.lang]:o.en):""}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function itemText(it,f){var o=it[S.lang]||it.en;return o[f]||""}
+function sourceLabel(it){var s=DATA.sources[it.source.key];if(!s)return it.source.key;var out=pick(s);if(it.source.votes!=null)out=out.replace("{{votes, display}}",fmt(it.source.votes,S.lang));return out}
+function facetLabel(name,id){var list=DATA.facets[name]||[];for(var i=0;i<list.length;i++){if(list[i].id===id)return pick(list[i].label)}return id}
+function horizonLabel(id){var h=DATA.horizons;for(var i=0;i<h.length;i++){if(h[i].id===id)return pick(h[i].label)}return id}
+function showAdvanced(n){var cat="other";try{cat=new Intl.PluralRules(S.lang).select(n)}catch(e){}var k="show_advanced_"+cat;var r=DATA.ui[S.lang]||DATA.ui.en;var s=r[k]||r.show_advanced_other||DATA.ui.en.show_advanced_other;return s.replace("{{count, display}}",fmt(n,S.lang))}
+
+// Theme, kind, effort and evidence are single values on an item; segments and platforms are lists.
+function dimField(dim){return dim==="themes"?"theme":dim}
+function dimValues(it,dim){var v=it[dimField(dim)];if(v===undefined||v===null)return [];return typeof v==="string"?[v]:v}
+
+function matches(it,skip){
+  if(S.lens==="lifestyle"&&it.segments.indexOf("advanced")>=0)return false;
+  var q=S.q.trim().toLowerCase();
+  if(q){
+    var hay=(it.id+" "+itemText(it,"title")+" "+itemText(it,"why")+" "+(it.parked?itemText(it,"parked"):"")+" "+sourceLabel(it)).toLowerCase();
+    if(hay.indexOf(q)<0)return false;
+  }
+  for(var i=0;i<DIMS.length;i++){
+    var d=DIMS[i];if(d===skip)continue;
+    var sel=S.sel[d];if(!sel.length)continue;
+    var vals=dimValues(it,d),ok=false;
+    for(var j=0;j<vals.length;j++){if(sel.indexOf(vals[j])>=0)ok=true}
+    if(!ok)return false;
+  }
+  return true;
+}
+function visible(skip){return DATA.items.filter(function(it){return matches(it,skip)})}
+function countsFor(dim){
+  var m={},rows=visible(dim);
+  for(var i=0;i<rows.length;i++){
+    var vals=dimValues(rows[i],dim),seen={};
+    for(var j=0;j<vals.length;j++){var v=vals[j];if(seen[v])continue;seen[v]=1;m[v]=(m[v]||0)+1}
+  }
+  return m;
+}
+function horizonCounts(rows){var m={};for(var i=0;i<rows.length;i++){var h=S.place[rows[i].id];m[h]=(m[h]||0)+1}return m}
+// Rows follow the board: column order first, then the position the user put the card in.
+function orderRows(rows){
+  var hi={},rk=rankMap();
+  HZ.forEach(function(h,i){hi[h]=i});
+  return rows.slice().sort(function(a,b){
+    var ha=hi[S.place[a.id]],hb=hi[S.place[b.id]];
+    if(ha!==hb)return ha-hb;
+    return (rk[a.id]||0)-(rk[b.id]||0);
+  });
+}
+function activeCount(){var n=0;for(var i=0;i<DIMS.length;i++)n+=S.sel[DIMS[i]].length;return n}
+
+function facetOptions(dim){
+  var out=[];
+  if(dim==="themes"){DATA.facets.themes.forEach(function(t){out.push({id:t.id,label:pick(t.label),color:themeColor[t.id]})})}
+  else{DATA.facets[dim].forEach(function(t){out.push({id:t.id,label:pick(t.label)})})}
+  return out;
+}
+
+function render(){
+  S.place=placeOf();
+  var rows=orderRows(visible()),hc=horizonCounts(rows),filters=activeCount();
+  var hidden=0;
+  if(S.lens!=="all"){
+    var all=DATA.items.filter(function(it){return matches(it)}).length;
+    var withAll=DATA.items.filter(function(it){var save=S.lens;S.lens="all";var m=matches(it);S.lens=save;return m}).length;
+    hidden=withAll-all;
+  }
+  var dir=S.lang==="ar"?"rtl":"ltr";
+  var h=[];
+  h.push('<div class="top"><div class="top-in">');
+  h.push('<div class="brand"><h1>'+esc(T("title"))+'</h1></div>');
+  h.push('<div class="controls">');
+  h.push('<label class="search">'+ICON.search+'<input id="q" value="'+esc(S.q)+'" placeholder="'+esc(T("search"))+'" aria-label="'+esc(T("search"))+'"></label>');
+  h.push('<div class="seg" role="group">'+
+    '<button data-act="lens" data-v="lifestyle" aria-pressed="'+(S.lens==="lifestyle")+'">'+esc(T("lens_lifestyle"))+'</button>'+
+    '<button data-act="lens" data-v="all" aria-pressed="'+(S.lens==="all")+'">'+esc(T("lens_all"))+'</button></div>');
+  h.push('<div class="seg" role="group">'+
+    '<button data-act="view" data-v="board" aria-pressed="'+(S.view==="board")+'">'+esc(T("view_board"))+'</button>'+
+    '<button data-act="view" data-v="table" aria-pressed="'+(S.view==="table")+'">'+esc(T("view_table"))+'</button></div>');
+  h.push('<button class="btn" data-act="rules" aria-pressed="'+S.rules+'">'+esc(S.rules?T("hide_rules"):T("show_rules"))+'</button>');
+  h.push('<button class="btn" data-act="lang" title="'+esc(S.lang==="en"?"العربية":"English")+'">'+esc(S.lang==="en"?"العربية":"English")+'</button>');
+  h.push('</div></div></div>');
+  h.push('<main>');
+  if(S.rules)h.push(rulesPanel());
+  h.push('<section class="panel bar">');
+  DATA.horizons.forEach(function(hr){h.push('<div class="stat"><span>'+esc(pick(hr.label))+'</span><b>'+(hc[hr.id]||0)+'</b></div>')});
+  h.push('<div class="meta"><span>'+esc(T("of_items_shown_total").replace("{{shown, display}}",fmt(rows.length,S.lang)).replace("{{total, display}}",fmt(DATA.items.length,S.lang)))+'</span>');
+  if(hidden>0)h.push('<button class="linkish" data-act="showAll">'+esc(showAdvanced(hidden))+'</button>');
+  if(filters>0)h.push('<button class="linkish" data-act="clear">'+esc(T("clear_filters"))+'</button>');
+  if(S.view==="board")h.push('<span class="hint">'+esc(T("drag_hint"))+'</span>');
+  if(isCustom())h.push('<button class="linkish" data-act="resetOrder">'+esc(T("reset_order"))+'</button>');
+  h.push('</div></section>');
+  if(S.picked)h.push(moveBar());
+  h.push('<button class="btn mobileOnly" data-act="facets" aria-pressed="'+S.facets+'">'+ICON.filter+esc(S.facets?T("hide_filters"):T("show_filters"))+(filters?' <span class="mono">'+filters+'</span>':"")+'</button>');
+  h.push('<div class="layout">');
+  h.push('<aside class="facets'+(S.facets?" open":"")+'">');
+  DIMS.forEach(function(dim){
+    var c=countsFor(dim);
+    h.push('<section class="facet"><h3>'+esc(T("facet_"+dim))+'</h3>');
+    facetOptions(dim).forEach(function(o){
+      var n=c[o.id]||0,on=S.sel[dim].indexOf(o.id)>=0;
+      h.push('<button data-act="facet" data-d="'+dim+'" data-v="'+esc(o.id)+'" aria-pressed="'+on+'" class="'+(n===0&&!on?"zero":"")+'">'+
+        '<span class="lbl">'+(o.color?'<i class="dot" style="background:'+o.color+'"></i>':"")+'<span>'+esc(o.label)+'</span></span>'+
+        '<span class="n">'+n+'</span></button>');
+    });
+    h.push('</section>');
+  });
+  h.push('</aside>');
+  h.push('<div>');
+  if(!rows.length){
+    h.push('<div class="panel" style="padding:32px 20px;text-align:center"><p style="font-weight:600">'+esc(T("nothing_matches"))+'</p>'+
+      '<p class="note" style="margin-top:6px">'+esc(T("clear_filters_to_see_more"))+'</p>'+
+      '<p style="margin-top:12px"><button class="linkish" data-act="clear">'+esc(T("clear_filters"))+'</button></p></div>');
+  } else if(S.view==="board"){h.push(board(rows,hc))} else {h.push(table(rows))}
+  h.push('</div></div></main>');
+  document.documentElement.lang=S.lang;document.documentElement.dir=dir;
+  document.title=META[S.lang].title;
+  [['meta[property="og:title"]',META[S.lang].title]].forEach(function(p){var m=document.querySelector(p[0]);if(m)m.setAttribute("content",p[1])});
+  document.getElementById("app").innerHTML=h.join("");
+  var qi=document.getElementById("q");
+  if(qi){qi.oninput=function(e){S.q=e.target.value;render();var n=document.getElementById("q");n.focus();n.setSelectionRange(n.value.length,n.value.length)}}
+}
+
+function board(rows,hc){
+  var h=['<div class="board">'];
+  DATA.horizons.forEach(function(hr){
+    var col=rows.filter(function(it){return S.place[it.id]===hr.id});
+    h.push('<section class="col" data-col="'+hr.id+'"><header><div class="head"><h2>'+esc(pick(hr.label))+'</h2><em>'+(hc[hr.id]||0)+'</em></div><p>'+esc(pick(hr.blurb))+'</p></header><div class="colbody">');
+    if(!col.length)h.push('<p class="empty">'+esc(T("nothing_here"))+'</p>');
+    col.forEach(function(it){h.push(card(it))});
+    h.push('</div>');
+    h.push('</section>');
+  });
+  h.push('</div>');
+  return h.join("");
+}
+
+function card(it){
+  var parked=S.place[it.id]==="parked";
+  var audience=it.segments.filter(function(s){return s!=="lifestyle"});
+  var h=['<article class="card'+(parked?" parked":"")+(S.picked===it.id?" picked":"")+'" draggable="true" data-act="pick" data-id="'+esc(it.id)+'">'];
+  h.push('<div class="ttl"><i style="background:'+(themeColor[it.theme]||"var(--ink-3)")+'"></i><h3>'+esc(itemText(it,"title"))+'</h3></div>');
+  h.push('<p class="why">'+esc(itemText(it,"why"))+'</p>');
+  if(parked)h.push('<p class="parked">'+esc(itemText(it,"parked")||T("parked_no_reason"))+'</p>');
+  h.push('<div class="chips"><span class="chip">'+esc(facetLabel("themes",it.theme))+'</span>');
+  audience.forEach(function(s){h.push('<span class="chip'+(s==="advanced"?" danger":"")+'">'+esc(facetLabel("segments",s))+'</span>')});
+  h.push('</div>');
+  h.push('<div class="foot"><span>'+esc(facetLabel("kinds",it.kind))+'</span><span aria-hidden="true">·</span>'+
+    '<span>'+esc(facetLabel("efforts",it.effort))+'</span>'+(it.phase?'<span aria-hidden="true">·</span><span>'+esc(T("phase").replace("{{phase}}",it.phase))+'</span>':"")+'<span aria-hidden="true">·</span>'+
+    '<span class="src">'+esc(sourceLabel(it))+'</span></div>');
+  h.push('</article>');
+  return h.join("");
+}
+
+function table(rows){
+  var cols=["column_item","column_horizon","column_theme","column_kind","column_segments","column_platforms","column_effort","column_evidence","column_phase","column_source"];
+  var h=['<div class="panel scroll"><table><thead><tr>'];
+  cols.forEach(function(c){h.push('<th>'+esc(T(c))+'</th>')});
+  h.push('</tr></thead><tbody>');
+  rows.forEach(function(it){
+    h.push('<tr><td><div class="t">'+esc(itemText(it,"title"))+'</div><p class="why" style="margin-top:5px">'+esc(itemText(it,"why"))+'</p>'+
+      (S.place[it.id]==="parked"?'<p class="p">'+esc(itemText(it,"parked")||T("parked_no_reason"))+'</p>':"")+'</td>'+
+      '<td>'+esc(horizonLabel(S.place[it.id]))+'</td>'+
+      '<td><span class="dot" style="background:'+(themeColor[it.theme]||"var(--ink-3)")+'"></span>'+esc(facetLabel("themes",it.theme))+'</td>'+
+      '<td>'+esc(facetLabel("kinds",it.kind))+'</td>'+
+      '<td>'+esc(it.segments.map(function(s){return facetLabel("segments",s)}).join(", "))+'</td>'+
+      '<td>'+esc(it.platforms.map(function(p){return facetLabel("platforms",p)}).join(", "))+'</td>'+
+      '<td>'+esc(facetLabel("efforts",it.effort))+'</td>'+
+      '<td>'+esc(facetLabel("evidence",it.evidence))+'</td>'+
+      '<td>'+esc(it.phase||"—")+'</td>'+
+      '<td class="s">'+esc(sourceLabel(it))+'</td></tr>');
+  });
+  h.push('</tbody></table></div>');
+  return h.join("");
+}
+
+function moveBar(){
+  var p=null;
+  DATA.items.forEach(function(x){if(x.id===S.picked)p=x});
+  if(!p)return "";
+  var h=['<section class="panel movebar"><p>'+esc(T("move_to"))+' <b>'+esc(itemText(p,"title"))+'</b></p><div class="moves">'];
+  DATA.horizons.forEach(function(hr){
+    if(S.place[p.id]===hr.id)return;
+    h.push('<button class="btn" data-act="move" data-h="'+hr.id+'">'+esc(pick(hr.label))+'</button>');
+  });
+  h.push('<button class="linkish" data-act="cancelMove">'+esc(T("move_cancel"))+'</button>');
+  h.push('</div></section>');
+  return h.join("");
+}
+
+function rulesPanel(){
+  var h=['<section class="panel rules">'];
+  h.push('<div><p class="k">'+esc(T("rules_title"))+'</p><ol>');
+  for(var i=1;i<=5;i++)h.push('<li><span>'+esc(T("rule_"+i))+'</span></li>');
+  h.push('</ol></div>');
+  h.push('<div><p class="k">'+esc(T("horizons_title"))+'</p><ul class="glossary">');
+  DATA.horizons.forEach(function(hr){h.push('<li><b>'+esc(pick(hr.label))+'</b> — '+esc(pick(hr.blurb))+'</li>')});
+  h.push('</ul></div>');
+  h.push('<div class="stack"><div><p class="k">'+esc(T("facet_themes"))+'</p><ul class="glossary">');
+  DATA.facets.themes.forEach(function(t){h.push('<li><i class="dot" style="background:'+themeColor[t.id]+'"></i><b>'+esc(pick(t.label))+'</b> — '+esc(pick(t.blurb))+'</li>')});
+  h.push('</ul></div><div><p class="k">'+esc(T("facet_evidence"))+'</p><ul class="glossary">');
+  DATA.facets.evidence.forEach(function(t){h.push('<li><b>'+esc(pick(t.label))+'</b> — '+esc(pick(t.blurb))+'</li>')});
+  h.push('</ul></div></div></section>');
+  return h.join("");
+}
+
+var ICON={search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>',filter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h18M6 12h12M10 19h4"></path></svg>'};
+
+document.getElementById("app").addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]");if(!b)return;
+  var a=b.getAttribute("data-act");
+  if(a==="lens")S.lens=b.getAttribute("data-v");
+  else if(a==="view")S.view=b.getAttribute("data-v");
+  else if(a==="rules")S.rules=!S.rules;
+  else if(a==="facets")S.facets=!S.facets;
+  else if(a==="lang")S.lang=S.lang==="en"?"ar":"en";
+  else if(a==="showAll")S.lens="all";
+  else if(a==="clear")S.sel={themes:[],segments:[],kinds:[],platforms:[],efforts:[],evidence:[]};
+  else if(a==="pick"){var pid=b.getAttribute("data-id");S.picked=(S.picked===pid?null:pid)}
+  else if(a==="move"){moveTo(S.picked,b.getAttribute("data-h"));return}
+  else if(a==="cancelMove")S.picked=null;
+  else if(a==="resetOrder"){S.order=cloneOrder(DEFAULT_ORDER);clearHash();saveOrder()}
+  else if(a==="facet"){
+    var d=b.getAttribute("data-d"),v=b.getAttribute("data-v"),arr=S.sel[d],i=arr.indexOf(v);
+    if(i>=0)arr.splice(i,1);else arr.push(v);
+  }
+  render();
+});
+
+// Drag and drop. Listeners live on the app shell, which render() never replaces.
+function clearDragUI(){
+  var d=document.querySelector(".card.dragging");
+  if(d)d.classList.remove("dragging");
+  var p=document.getElementById("ph");
+  if(p&&p.parentNode)p.parentNode.removeChild(p);
+  var o=document.querySelector(".col.over");
+  if(o)o.classList.remove("over");
+}
+document.getElementById("app").addEventListener("dragstart",function(e){
+  var c=e.target.closest?e.target.closest(".card"):null;
+  if(!c)return;
+  S.drag=c.getAttribute("data-id");
+  try{e.dataTransfer.setData("text/plain",S.drag);e.dataTransfer.effectAllowed="move"}catch(err){}
+  c.classList.add("dragging");
+});
+document.getElementById("app").addEventListener("dragend",function(){clearDragUI();S.drag=null});
+document.getElementById("app").addEventListener("dragover",function(e){
+  var col=e.target.closest?e.target.closest("[data-col]"):null;
+  if(!col||!S.drag)return;
+  e.preventDefault();
+  try{e.dataTransfer.dropEffect="move"}catch(err){}
+  var body=col.querySelector(".colbody");
+  if(!body)return;
+  var ph=document.getElementById("ph");
+  if(!ph){ph=document.createElement("div");ph.id="ph";ph.className="ph"}
+  var after=null,cards=Array.prototype.slice.call(body.querySelectorAll(".card:not(.dragging)"));
+  for(var i=0;i<cards.length;i++){
+    var r=cards[i].getBoundingClientRect();
+    if(e.clientY<r.top+r.height/2){after=cards[i];break}
+  }
+  if(after)body.insertBefore(ph,after);else body.appendChild(ph);
+  var cur=document.querySelector(".col.over");
+  if(cur&&cur!==col)cur.classList.remove("over");
+  col.classList.add("over");
+});
+document.getElementById("app").addEventListener("drop",function(e){
+  var col=e.target.closest?e.target.closest("[data-col]"):null;
+  if(!col||!S.drag)return;
+  e.preventDefault();
+  var h=col.getAttribute("data-col"),body=col.querySelector(".colbody"),ph=document.getElementById("ph");
+  var idx=S.order[h].length;
+  if(ph&&body&&ph.parentNode===body){
+    var kids=Array.prototype.slice.call(body.children),at=kids.indexOf(ph),n=0;
+    for(var k=0;k<at;k++){
+      var el=kids[k];
+      if(el.classList&&el.classList.contains("card")&&!el.classList.contains("dragging"))n++;
+    }
+    idx=n;
+  }
+  HZ.forEach(function(x){var p=S.order[x].indexOf(S.drag);if(p>=0)S.order[x].splice(p,1)});
+  if(idx>S.order[h].length)idx=S.order[h].length;
+  S.order[h].splice(idx,0,S.drag);
+  S.drag=null;saveOrder();clearDragUI();render();
+});
+render();
+</script>
+</body>
+</html>
